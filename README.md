@@ -26,7 +26,7 @@ Is necessary to install the following programs:
 
 ## Contributors
 
-- Developer: <Paulo coelho> 
+- Developer: Paulo Coelho 
 - Email: <paulo.coelho1989@gmail.com> 
 - Linkedin: <https://www.linkedin.com/in/paulo-coelho-437742b0/>
 
