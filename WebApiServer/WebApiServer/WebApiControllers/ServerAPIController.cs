@@ -97,7 +97,7 @@ namespace WebApiServer.WebApiControllers
         [HttpPost]
         public HttpResponseMessage PostQuestion([FromBody] QuestionViewModel question)
         {
-            if (question == null)
+            if (question.GetType().GetProperties().Any(x => x.GetValue(question) == null))
             {
                 log.Error("Bad Request: JSON Object passed by params is invalid!");
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request. All fields are mandatory.");
