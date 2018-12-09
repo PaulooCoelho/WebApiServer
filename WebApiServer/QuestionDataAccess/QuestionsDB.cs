@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// This class was created to simulate a database in order to test the API without a real database connection. 
-/// It's deprecated now since the connections were already made with sql server.
-/// </summary>
 namespace QuestionDataAccess
 {
+    /// <summary>
+    /// This class was created to simulate a database in order to test the API without a real database connection. 
+    /// It's deprecated now since the connections were already made with sql server.
+    /// </summary>
     public class QuestionsDB : IDisposable
     {
         public static List<QuestionModel> QuestionsEntities = new List<QuestionModel>()

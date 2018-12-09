@@ -10,6 +10,10 @@ using WebApiServer.ViewModels;
 
 namespace WebApiServer.WebApiControllers
 {
+    /// <summary>
+    /// Web Api Controller with Gets, Posts and Puts endpoints.
+    /// This web api controller will handle the issues requested by the client.
+    /// </summary>
     public class ServerAPIController : ApiController
     {
         private ILog log = LogManager.GetLogger(typeof(ServerAPIController));

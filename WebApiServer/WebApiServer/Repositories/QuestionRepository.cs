@@ -9,6 +9,11 @@ using log4net;
 
 namespace WebApiServer.Repositories
 {
+    /// <summary>
+    /// This class represents the database communication layer. It is here where all the communication with the sql server database is done.
+    /// When the service layer needs data to work with, calls the respective method from this class, passing all the information needed. 
+    /// The called method (here in this class) works on the data and returns the values to the service.
+    /// </summary>
     public class QuestionRepository
     {
         private ILog log = LogManager.GetLogger(typeof(QuestionRepository));

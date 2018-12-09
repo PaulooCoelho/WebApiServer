@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// This class was created to simulate a table model in order to test the API without a real database connection.
-/// It's deprecated now since the connections were already made with sql server.
-/// </summary>
 namespace QuestionDataAccess.Models
 {
+    /// <summary>
+    /// This class was created to simulate a table model in order to test the API without a real database connection.
+    /// It's deprecated now since the connections were already made with sql server.
+    /// </summary>
     public class QuestionModel
     {
         public int ID { get; set; }
