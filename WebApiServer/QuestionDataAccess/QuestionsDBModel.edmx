@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuestionsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TChoices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_TQuestion_ID" Type="int" Nullable="false" />
+          <Property Name="Choice" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Votes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Image_url" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Thumb_url" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Published_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TChoices_TQuestions">
+          <End Role="TQuestions" Type="Self.TQuestions" Multiplicity="1" />
+          <End Role="TChoices" Type="Self.TChoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TChoices">
+              <PropertyRef Name="FK_TQuestion_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuestionsDBModelStoreContainer">
+          <EntitySet Name="TChoices" EntityType="Self.TChoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TQuestions" EntityType="Self.TQuestions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TChoices_TQuestions" Association="Self.FK_TChoices_TQuestions">
+            <End Role="TQuestions" EntitySet="TQuestions" />
+            <End Role="TChoices" EntitySet="TChoices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuestionsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TChoice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_TQuestion_ID" Type="Int32" Nullable="false" />
+          <Property Name="Choice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Votes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TQuestion" Relationship="Self.FK_TChoices_TQuestions" FromRole="TChoices" ToRole="TQuestions" />
+        </EntityType>
+        <EntityType Name="TQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image_url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Thumb_url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Published_at" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TChoices" Relationship="Self.FK_TChoices_TQuestions" FromRole="TQuestions" ToRole="TChoices" />
+        </EntityType>
+        <Association Name="FK_TChoices_TQuestions">
+          <End Role="TQuestions" Type="Self.TQuestion" Multiplicity="1" />
+          <End Role="TChoices" Type="Self.TChoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TChoices">
+              <PropertyRef Name="FK_TQuestion_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuestionsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TChoices" EntityType="Self.TChoice" />
+          <EntitySet Name="TQuestions" EntityType="Self.TQuestion" />
+          <AssociationSet Name="FK_TChoices_TQuestions" Association="Self.FK_TChoices_TQuestions">
+            <End Role="TQuestions" EntitySet="TQuestions" />
+            <End Role="TChoices" EntitySet="TChoices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuestionsDBModelStoreContainer" CdmEntityContainer="QuestionsDBEntities">
+          <EntitySetMapping Name="TChoices">
+            <EntityTypeMapping TypeName="QuestionsDBModel.TChoice">
+              <MappingFragment StoreEntitySet="TChoices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_TQuestion_ID" ColumnName="FK_TQuestion_ID" />
+                <ScalarProperty Name="Choice" ColumnName="Choice" />
+                <ScalarProperty Name="Votes" ColumnName="Votes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TQuestions">
+            <EntityTypeMapping TypeName="QuestionsDBModel.TQuestion">
+              <MappingFragment StoreEntitySet="TQuestions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Image_url" ColumnName="Image_url" />
+                <ScalarProperty Name="Thumb_url" ColumnName="Thumb_url" />
+                <ScalarProperty Name="Published_at" ColumnName="Published_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
