@@ -99,7 +99,8 @@ namespace WebApiServer.Repositories
                     modelToUpdate.Thumb_url = model.Thumb_url;
                     modelToUpdate.Published_at = model.Published_at;
 
-                    for (int i = 0; i < modelToUpdate.TChoices.Count(); i++)
+                    var index = Math.Min(model.TChoices.Count(), modelToUpdate.TChoices.Count());
+                    for (int i = 0; i < index; i++)
                     {
                         modelToUpdate.TChoices.ElementAt(i).Choice = model.TChoices.ElementAt(i).Choice;
                         modelToUpdate.TChoices.ElementAt(i).Votes = model.TChoices.ElementAt(i).Votes;
