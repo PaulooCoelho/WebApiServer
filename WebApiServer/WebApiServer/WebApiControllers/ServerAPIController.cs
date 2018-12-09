@@ -104,7 +104,7 @@ namespace WebApiServer.WebApiControllers
             }
 
             log.Info("New question has been created!");
-            questionService.CreateQuestion(question);
+            question = questionService.CreateQuestion(question);
             return Request.CreateResponse(HttpStatusCode.Created, question);
         }
 

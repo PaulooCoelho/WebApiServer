@@ -67,7 +67,7 @@ namespace WebApiServer.Repositories
             }
         }
 
-        public void CreateQuestion(TQuestion model)
+        public int CreateQuestion(TQuestion model)
         {
             try
             {
@@ -75,11 +75,14 @@ namespace WebApiServer.Repositories
                 {
                     dbContext.TQuestions.Add(model);
                     dbContext.SaveChanges();
+
+                    return model.ID;
                 }
             }
             catch (Exception exception)
             {
                 log.Error(exception);
+                return -1;
             }
         }
 

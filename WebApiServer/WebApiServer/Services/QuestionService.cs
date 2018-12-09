@@ -55,15 +55,18 @@ namespace WebApiServer.Services
             }
         }
 
-        public void CreateQuestion(QuestionViewModel question)
+        public QuestionViewModel CreateQuestion(QuestionViewModel question)
         {
             try
             {
-                questionRepository.CreateQuestion(map.ViewModelToEntity(question));
+                question.ID = questionRepository.CreateQuestion(map.ViewModelToEntity(question));
+
+                return question;
             }
             catch (Exception exception)
             {
                 log.Error(exception);
+                return new QuestionViewModel();
             }
         }
 
