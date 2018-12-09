@@ -8,10 +8,10 @@ Simple web api project developed with Visual Studio 2017 Community Edition.
 
 # How to Setup
 
-- Is necessary to install the following programs:
+Is necessary to install the following programs:
 
-Visual Studio 2017 community Edition <https://visualstudio.microsoft.com/vs/community/>
-SQL Server Express 2012 <https://www.microsoft.com/en-us/download/details.aspx?id=29062>
+- Visual Studio 2017 community Edition <https://visualstudio.microsoft.com/vs/community/>
+- SQL Server Express 2012 <https://www.microsoft.com/en-us/download/details.aspx?id=29062>
 
 ---
 
