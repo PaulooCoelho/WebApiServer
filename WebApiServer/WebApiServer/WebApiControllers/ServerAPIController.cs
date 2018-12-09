@@ -45,10 +45,11 @@ namespace WebApiServer.WebApiControllers
         [HttpGet]
         public HttpResponseMessage GetQuestions(int limit = 0, int offset = 0, string filter = "")
         {
-            if (filter == null)
+            if (limit < 0 || offset < 0 || filter == null)
             {
-                log.Error("Bad Request: filter[" + filter + "] is invalid!");
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "filter [" + filter + "] is invalid!");
+                var errorMessage = "Bad Request: limit[" + limit + "]; offset[" + offset + "]; filter[" + filter + "]; Expected: limit[>=0]; offset[>=0]; limit[!= null];";
+                log.Error(errorMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessage);
             }
 
             log.Info("Retrieving questions: limit[" + limit + "]; offset[" + offset + "]; filter[" + filter + "]");
@@ -65,10 +66,17 @@ namespace WebApiServer.WebApiControllers
         [HttpGet]
         public HttpResponseMessage GetQuestion(int question_id)
         {
-            if (!questionService.Exists(question_id))
+            if (question_id < 0)
             {
-                log.Error("Bad Request: question_id[" + question_id + "] is invalid!");
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There is no question with the id[" + question_id + "].");
+                var errorMessage = "Bad Request: question_id[" + question_id + "]; Expected: question_id[>=0];";
+                log.Error(errorMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errorMessage);
+            }
+            else if (!questionService.Exists(question_id))
+            {
+                var errorMessage = "Not Found: There is no question with the id[" + question_id + "].";
+                log.Error(errorMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, errorMessage);
             }
 
             log.Info("Retrieving question: question_id[" + question_id + "]");
@@ -127,7 +135,6 @@ namespace WebApiServer.WebApiControllers
         /// <summary>
         /// Updates an existing question . It takes a JSON object containing a question and aa collection of answers in the form of choices.
         /// </summary>
-        /// <param name="question_id">Id of the question to update.</param>
         /// <param name="question">JSON Object with all the properties to update the question.</param>
         /// <returns></returns>
         [Route("api/questions")]
