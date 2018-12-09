@@ -17,16 +17,18 @@ Is necessary to install the following programs:
 
 # Compile and Run
 
-1 - Clone this repo into visual Studio 2017
-2 - Use the SQl Server script inside the "SQL_Server_Scripts" folder to create the database, tables and some records
-3 - Change both Web.config and App.Config files connection string to match your local server name (data source=****\****;)
-4 - Build and run the project!
+- Clone this repo into visual Studio 2017
+- Use the SQl Server script inside the "SQL_Server_Scripts" folder to create the database, tables and some records
+- Change both Web.config and App.Config files connection string to match your local server name (data source=****\****;)
+- Build and run the project!
 
 ---
 
 ## Contributors
 
-- Paulo coelho <paulo.coelho1989@gmail.com> <https://www.linkedin.com/in/paulo-coelho-437742b0/>
+- Developer: <Paulo coelho> 
+- Email: <paulo.coelho1989@gmail.com> 
+- Linkedin: <https://www.linkedin.com/in/paulo-coelho-437742b0/>
 
 ---
 
